@@ -46,16 +46,16 @@ export default function HealthStatus() {
   return (
     <div className="glass-card health-panel">
       <div className="panel-title">
-        <Server size={20} className="text-primary" />
+        <Server size={18} style={{ color: 'var(--text-secondary)' }} />
         <span>System Status</span>
       </div>
 
       <div className="status-indicator">
         <div className={`status-dot ${status}`}></div>
         <div className="status-text">
-          {status === 'online' && <span style={{ color: 'var(--success)' }}>Connected to API</span>}
-          {status === 'offline' && <span style={{ color: 'var(--danger)' }}>Backend Offline</span>}
-          {status === 'checking' && <span style={{ color: 'var(--warning)' }}>Checking Connection...</span>}
+          {status === 'online' && <span style={{ color: 'var(--text-primary)' }}>Connected</span>}
+          {status === 'offline' && <span style={{ color: 'var(--danger)' }}>Offline</span>}
+          {status === 'checking' && <span style={{ color: 'var(--text-muted)' }}>Checking...</span>}
         </div>
       </div>
 
@@ -80,17 +80,6 @@ export default function HealthStatus() {
           <div className="stat-label">Last Checked</div>
           <div className="stat-value">{lastChecked || '--'}</div>
         </div>
-
-        {healthData && (
-          <div className="stat-item" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '8px', paddingTop: '1rem' }}>
-            <div className="stat-label" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Terminal size={12} /> API Response
-            </div>
-            <pre className="json-preview">
-              {JSON.stringify(healthData, null, 2)}
-            </pre>
-          </div>
-        )}
       </div>
 
       <button 
@@ -99,8 +88,8 @@ export default function HealthStatus() {
         disabled={isRefreshing}
         style={{ width: '100%', marginTop: '0.5rem' }}
       >
-        <RefreshCw size={16} className={isRefreshing ? 'spin-animation' : ''} />
-        {isRefreshing ? 'Refreshing...' : 'Refresh Connection'}
+        <RefreshCw size={14} className={isRefreshing ? 'spin-animation' : ''} />
+        {isRefreshing ? 'Checking...' : 'Check Status'}
       </button>
 
       <style dangerouslySetInnerHTML={{__html: `

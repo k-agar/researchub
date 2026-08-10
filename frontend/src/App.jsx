@@ -4,7 +4,6 @@ import HealthStatus from './components/HealthStatus';
 import { 
   FileText, 
   Upload, 
-  Sparkles, 
   AlertCircle, 
   Loader2, 
   CheckCircle, 
@@ -156,13 +155,8 @@ export default function App() {
     <div className="app-container">
       <header>
         <div className="logo-container">
-          <FileText size={28} className="text-primary" style={{ color: 'var(--primary)' }} />
+          <FileText size={22} style={{ color: 'var(--text-primary)' }} />
           <span className="logo-text">ResearchHub</span>
-          <span className="badge">Ingestion active</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-          <Sparkles size={16} style={{ color: 'var(--accent)' }} />
-          <span>AI Research Companion</span>
         </div>
       </header>
 
@@ -175,27 +169,27 @@ export default function App() {
           <div className="glass-card workspace-card">
             
             {/* Tab Navigation */}
-            <div className="tab-navigation" style={{ display: 'flex', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '1.5rem', gap: '0.5rem' }}>
+            <div className="tab-navigation" style={{ display: 'flex', borderBottom: '1px solid var(--border-color)', marginBottom: '1.5rem', gap: '0.5rem' }}>
               <button 
                 className={`tab-btn ${activeTab === 'upload' ? 'active' : ''}`}
                 onClick={() => setActiveTab('upload')}
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: activeTab === 'upload' ? 'var(--primary)' : 'var(--text-muted)',
-                  borderBottom: activeTab === 'upload' ? '2px solid var(--primary)' : '2px solid transparent',
+                  color: activeTab === 'upload' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  borderBottom: activeTab === 'upload' ? '2px solid var(--text-primary)' : '2px solid transparent',
                   padding: '0.75rem 1rem',
                   cursor: 'pointer',
-                  fontWeight: 600,
-                  fontSize: '0.95rem',
-                  transition: 'all 0.2s ease',
+                  fontWeight: 500,
+                  fontSize: '0.9rem',
+                  transition: 'all 0.15s ease',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px'
                 }}
               >
-                <Upload size={16} />
-                Document Ingestion
+                <Upload size={14} />
+                Upload PDF
               </button>
               <button 
                 className={`tab-btn ${activeTab === 'chat' ? 'active' : ''}`}
@@ -203,20 +197,20 @@ export default function App() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: activeTab === 'chat' ? 'var(--primary)' : 'var(--text-muted)',
-                  borderBottom: activeTab === 'chat' ? '2px solid var(--primary)' : '2px solid transparent',
+                  color: activeTab === 'chat' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  borderBottom: activeTab === 'chat' ? '2px solid var(--text-primary)' : '2px solid transparent',
                   padding: '0.75rem 1rem',
                   cursor: 'pointer',
-                  fontWeight: 600,
-                  fontSize: '0.95rem',
-                  transition: 'all 0.2s ease',
+                  fontWeight: 500,
+                  fontSize: '0.9rem',
+                  transition: 'all 0.15s ease',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px'
                 }}
               >
-                <MessageSquare size={16} />
-                Research Chat
+                <MessageSquare size={14} />
+                Chat
               </button>
             </div>
 
@@ -226,8 +220,8 @@ export default function App() {
                 {!uploading && !uploadResult && (
                   <div className="upload-container" onDragEnter={handleDrag}>
                     <div className="panel-title" style={{ marginBottom: '1.5rem' }}>
-                      <Upload size={20} style={{ color: 'var(--primary)' }} />
-                      <span>PDF Ingestion Portal</span>
+                      <Upload size={18} style={{ color: 'var(--text-secondary)' }} />
+                      <span>Upload Document</span>
                     </div>
 
                     <form onSubmit={handleUpload} onDragOver={handleDrag} onDragLeave={handleDrag} onDrop={handleDrop}>
@@ -242,20 +236,20 @@ export default function App() {
                       
                       <div className={`dropzone-placeholder ${dragActive ? 'drag-active' : ''}`} style={{ cursor: 'pointer' }} onClick={onButtonClick}>
                         <div className="icon-wrapper">
-                          <Upload size={28} />
+                          <Upload size={20} />
                         </div>
                         <div>
-                          <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.25rem' }}>
-                            {selectedFile ? 'Change PDF file' : 'Upload your research paper'}
+                          <h3 style={{ fontSize: '1rem', fontWeight: 500, marginBottom: '0.25rem' }}>
+                            {selectedFile ? 'Change PDF file' : 'Select a PDF document'}
                           </h3>
-                          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                          <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
                             Drag and drop your PDF here, or click to browse
                           </p>
                         </div>
                         
                         {selectedFile && (
                           <div className="selected-file-badge">
-                            <File size={16} />
+                            <File size={14} />
                             <span>{selectedFile.name} ({(selectedFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
                           </div>
                         )}
@@ -269,7 +263,7 @@ export default function App() {
 
                       {error && (
                         <div className="error-alert">
-                          <AlertCircle size={18} />
+                          <AlertCircle size={16} />
                           <span>{error}</span>
                         </div>
                       )}
@@ -281,8 +275,7 @@ export default function App() {
                           disabled={!selectedFile}
                           style={{ width: '100%' }}
                         >
-                          <Sparkles size={16} />
-                          Ingest Document
+                          Upload Document
                         </button>
                       </div>
                     </form>
@@ -292,9 +285,9 @@ export default function App() {
                 {/* 2. LOADING STATE */}
                 {uploading && (
                   <div className="loading-container">
-                    <Loader2 className="spinner-icon" size={48} />
-                    <h3>Ingesting & Indexing Document</h3>
-                    <p>Extracting text, partitioning chunks, generating Hugging Face embeddings, and indexing into ChromaDB...</p>
+                    <Loader2 className="spinner-icon" size={32} style={{ color: 'var(--text-secondary)' }} />
+                    <h3 style={{ fontWeight: 500 }}>Processing PDF</h3>
+                    <p style={{ fontSize: '0.875rem' }}>Extracting and reading document text. Please wait...</p>
                   </div>
                 )}
 
@@ -303,41 +296,41 @@ export default function App() {
                   <div className="results-container">
                     <div className="results-header">
                       <div className="success-icon-badge">
-                        <CheckCircle size={24} />
+                        <CheckCircle size={20} />
                       </div>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span className="success-label">INGESTION COMPLETE</span>
+                          <span className="success-label">UPLOAD SUCCESSFUL</span>
                           {uploadResult.indexed && (
-                            <span className="badge" style={{ background: 'var(--success-glow)', color: 'var(--success)', borderColor: 'rgba(16, 185, 129, 0.2)', padding: '0.1rem 0.5rem', fontSize: '0.65rem', textTransform: 'none' }}>
-                              Indexed in Vector DB
+                            <span className="badge" style={{ fontSize: '0.65rem' }}>
+                              Ready
                             </span>
                           )}
                         </div>
-                        <h2 className="doc-title">{uploadResult.filename}</h2>
+                        <h2 className="doc-title" style={{ fontSize: '1.2rem', fontWeight: 600 }}>{uploadResult.filename}</h2>
                       </div>
                     </div>
 
                     <div className="stats-dashboard">
                       <div className="stat-card">
-                        <BookOpen size={20} className="icon-blue" />
+                        <BookOpen size={16} className="icon-blue" />
                         <div className="stat-card-info">
-                          <span className="card-val">{uploadResult.number_of_pages}</span>
+                          <span className="card-val" style={{ fontSize: '1.25rem' }}>{uploadResult.number_of_pages}</span>
                           <span className="card-lbl">Total Pages</span>
                         </div>
                       </div>
                       <div className="stat-card">
-                        <Layers size={20} className="icon-purple" />
+                        <Layers size={16} className="icon-purple" />
                         <div className="stat-card-info">
-                          <span className="card-val">{uploadResult.number_of_chunks}</span>
-                          <span className="card-lbl">Generated Chunks</span>
+                          <span className="card-val" style={{ fontSize: '1.25rem' }}>{uploadResult.number_of_chunks}</span>
+                          <span className="card-lbl">Sections</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="chunks-section">
-                      <h3 className="section-title">
-                        <Layers size={16} /> Chunks Preview (showing first 3 of {uploadResult.number_of_chunks})
+                      <h3 className="section-title" style={{ fontSize: '1rem', fontWeight: 500 }}>
+                        <Layers size={14} style={{ color: 'var(--text-secondary)' }} /> Content Preview (first 3 sections)
                       </h3>
                       <div className="chunks-list">
                         {uploadResult.chunks.slice(0, 3).map((chunk) => (
@@ -352,25 +345,25 @@ export default function App() {
                           </div>
                         ))}
                       </div>
-                    </div>
-
-                    <button className="btn btn-outline" onClick={resetUpload} style={{ marginTop: '2rem' }}>
-                      <ArrowLeft size={16} /> Ingest Another Document
+                    </div>                    <button className="btn btn-outline" onClick={resetUpload} style={{ marginTop: '2rem' }}>
+                      <ArrowLeft size={14} /> Upload another file
                     </button>
                   </div>
                 )}
               </>
-            )}            {activeTab === 'chat' && (
+            )}
+
+            {activeTab === 'chat' && (
               <div className="chat-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '480px' }}>
                 <div className="panel-title" style={{ marginBottom: '1.25rem', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <MessageSquare size={20} style={{ color: 'var(--primary)' }} />
-                    <span>Research RAG Assistant</span>
+                    <MessageSquare size={18} style={{ color: 'var(--text-secondary)' }} />
+                    <span>Document Chat</span>
                   </div>
                   {currentFilename && (
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: '28px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ color: 'var(--accent)' }}>•</span>
-                      <span>Chatting about: <strong style={{ color: 'var(--text-secondary)' }}>{currentFilename}</strong></span>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: '26px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ color: 'var(--text-secondary)' }}>•</span>
+                      <span>Active file: <strong style={{ color: 'var(--text-primary)' }}>{currentFilename}</strong></span>
                     </div>
                   )}
                 </div>
@@ -381,9 +374,9 @@ export default function App() {
                   overflowY: 'auto', 
                   maxHeight: '420px',
                   padding: '1.2rem', 
-                  background: 'rgba(255, 255, 255, 0.01)', 
-                  border: '1px solid rgba(255, 255, 255, 0.05)', 
-                  borderRadius: '16px',
+                  background: 'var(--bg-dark)', 
+                  border: '1px solid var(--border-color)', 
+                  borderRadius: '8px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1rem',
@@ -401,10 +394,10 @@ export default function App() {
                       textAlign: 'center',
                       padding: '2rem 1rem'
                     }}>
-                      <Upload size={40} style={{ color: 'var(--primary)', opacity: 0.4, marginBottom: '0.75rem' }} />
-                      <h4 style={{ fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.25rem', fontSize: '0.95rem' }}>No Active Document</h4>
-                      <p style={{ fontSize: '0.82rem', maxWidth: '360px', lineHeight: '1.4' }}>
-                        Please ingest a PDF research paper under the "Document Ingestion" tab to start chatting.
+                      <Upload size={32} style={{ color: 'var(--text-muted)', opacity: 0.5, marginBottom: '0.75rem' }} />
+                      <h4 style={{ fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '0.25rem', fontSize: '0.9rem' }}>No active document</h4>
+                      <p style={{ fontSize: '0.8rem', maxWidth: '300px', lineHeight: '1.4' }}>
+                        Please upload a PDF document under the "Upload PDF" tab to start chatting.
                       </p>
                     </div>
                   ) : chatMessages.length === 0 ? (
@@ -418,10 +411,10 @@ export default function App() {
                       textAlign: 'center',
                       padding: '2rem 1rem'
                     }}>
-                      <BookOpen size={40} style={{ color: 'var(--primary)', opacity: 0.4, marginBottom: '0.75rem' }} />
-                      <h4 style={{ fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.25rem', fontSize: '0.95rem' }}>Ask your Research Companion</h4>
-                      <p style={{ fontSize: '0.82rem', maxWidth: '360px', lineHeight: '1.4' }}>
-                        Ask questions about the uploaded paper. Responses are strictly grounded on the extracted text and cite references.
+                      <BookOpen size={32} style={{ color: 'var(--text-muted)', opacity: 0.5, marginBottom: '0.75rem' }} />
+                      <h4 style={{ fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '0.25rem', fontSize: '0.9rem' }}>Ask a question about the document</h4>
+                      <p style={{ fontSize: '0.8rem', maxWidth: '300px', lineHeight: '1.4' }}>
+                        Answers are generated using the content of the uploaded PDF file.
                       </p>
                     </div>
                   ) : (
@@ -431,18 +424,18 @@ export default function App() {
                         flexDirection: 'column',
                         alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start',
                         width: '100%',
-                        animation: 'fadeIn 0.25s ease-out'
+                        animation: 'fadeIn 0.2s ease-out'
                       }}>
                         {/* Bubble */}
                         <div style={{
                           maxWidth: '85%',
-                          padding: '0.8rem 1rem',
-                          borderRadius: msg.role === 'user' ? '14px 14px 2px 14px' : '14px 14px 14px 2px',
-                          background: msg.role === 'user' ? 'var(--primary)' : 'rgba(255, 255, 255, 0.03)',
-                          color: 'var(--text)',
-                          fontSize: '0.9rem',
-                          lineHeight: '1.45',
-                          border: msg.role === 'user' ? 'none' : '1px solid rgba(255, 255, 255, 0.05)'
+                          padding: '0.75rem 1rem',
+                          borderRadius: msg.role === 'user' ? '6px 6px 2px 6px' : '6px 6px 6px 2px',
+                          background: msg.role === 'user' ? 'var(--text-primary)' : 'var(--bg-card-hover)',
+                          color: msg.role === 'user' ? 'var(--bg-dark)' : 'var(--text-primary)',
+                          fontSize: '0.875rem',
+                          lineHeight: '1.5',
+                          border: msg.role === 'user' ? 'none' : '1px solid var(--border-color)'
                         }}>
                           {msg.content}
                         </div>
@@ -457,21 +450,21 @@ export default function App() {
                             gap: '6px',
                             alignItems: 'center'
                           }}>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Sources:</span>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Sources:</span>
                             {msg.sources.map((src, sIdx) => (
                               <span 
                                 key={sIdx} 
                                 style={{ 
                                   fontSize: '0.7rem', 
-                                  color: '#818cf8', 
-                                  background: 'rgba(99, 102, 241, 0.06)',
-                                  border: '1px solid rgba(99, 102, 241, 0.12)',
+                                  color: 'var(--text-primary)', 
+                                  background: 'var(--bg-card-hover)',
+                                  border: '1px solid var(--border-color)',
                                   padding: '0.1rem 0.4rem', 
                                   borderRadius: '4px',
                                   display: 'inline-flex',
                                   alignItems: 'center'
                                 }}
-                                title={`Chunk #${src.chunk_index}`}
+                                title={`Section #${src.chunk_index}`}
                               >
                                 {src.filename} (Page {src.page_number})
                               </span>
@@ -485,8 +478,8 @@ export default function App() {
                   {/* Chat Loading message */}
                   {chatLoading && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.8rem', paddingLeft: '0.2rem' }}>
-                      <Loader2 className="spinner-icon" size={14} />
-                      <span>Retrieving chunks and reasoning...</span>
+                      <Loader2 className="spinner-icon" size={12} />
+                      <span>Searching document...</span>
                     </div>
                   )}
                 </div>
@@ -494,7 +487,7 @@ export default function App() {
                 {/* Error Banner */}
                 {chatError && (
                   <div className="error-alert" style={{ marginBottom: '1.25rem' }}>
-                    <AlertCircle size={18} />
+                    <AlertCircle size={16} />
                     <span>{chatError}</span>
                   </div>
                 )}
@@ -503,34 +496,33 @@ export default function App() {
                 <form onSubmit={handleChatSubmit} style={{ display: 'flex', gap: '10px' }}>
                   <input 
                     type="text" 
-                    placeholder={currentDocumentId ? "Ask a question about the active paper..." : "Ingest a PDF to enable chat"} 
+                    placeholder={currentDocumentId ? "Ask a question about the document..." : "Upload a PDF to start"} 
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
                     disabled={chatLoading || !currentDocumentId}
                     style={{
                       flex: 1,
-                      padding: '0.75rem 1.1rem',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
-                      borderRadius: '12px',
-                      color: 'var(--text)',
-                      fontSize: '0.92rem',
+                      padding: '0.6rem 1rem',
+                      background: 'var(--bg-dark)',
+                      border: '1px solid var(--border-color)',
+                      borderRadius: '6px',
+                      color: 'var(--text-primary)',
+                      fontSize: '0.875rem',
                       outline: 'none',
-                      transition: 'border-color 0.2s ease',
-                      opacity: currentDocumentId ? 1 : 0.6,
+                      transition: 'border-color 0.15s ease',
+                      opacity: currentDocumentId ? 1 : 0.5,
                       cursor: currentDocumentId ? 'text' : 'not-allowed'
                     }}
-                    onFocus={(e) => e.target.style.borderColor = 'var(--primary)'}
-                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.06)'}
+                    onFocus={(e) => e.target.style.borderColor = 'var(--border-active)'}
+                    onBlur={(e) => e.target.style.borderColor = 'var(--border-color)'}
                   />
                   <button 
                     type="submit" 
                     className="btn btn-primary"
                     disabled={chatLoading || !chatInput.trim() || !currentDocumentId}
-                    style={{ padding: '0.75rem 1.6rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}
+                    style={{ padding: '0.6rem 1.2rem', borderRadius: '6px' }}
                   >
-                    <span>Ask</span>
-                    <Sparkles size={14} />
+                    Ask
                   </button>
                 </form>
               </div>
@@ -541,7 +533,7 @@ export default function App() {
       </main>
 
       <footer>
-        <p>© 2026 ResearchHub Ingestion Engine. Built with PyMuPDF, FastAPI and React.</p>
+        <p>© 2026 ResearchHub. Built with React and FastAPI.</p>
       </footer>
     </div>
   );
