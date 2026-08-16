@@ -119,11 +119,11 @@ header {
   }
 }
 
-/* Health Connection Panel styling */
-.health-panel {
+/* FAQ Sidebar Panel */
+.faq-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .panel-title {
@@ -136,60 +136,14 @@ header {
   gap: 0.5rem;
 }
 
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-color);
+.faq-btn:hover:not(:disabled) {
+  border-color: var(--border-active) !important;
+  background: var(--bg-card-hover) !important;
+  transform: translateY(-1px);
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.status-dot.online {
-  background-color: var(--success);
-}
-
-.status-dot.offline {
-  background-color: var(--danger);
-}
-
-.status-dot.checking {
-  background-color: var(--warning);
-}
-
-.status-text {
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.stat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.stat-item:last-child {
-  border-bottom: none;
-}
-
-.stat-label {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-}
-
-.stat-value {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--text-primary);
+.faq-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn {

@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import HealthStatus from './components/HealthStatus';
+import ResearchFAQs from './components/ResearchFAQs';
 import { 
   FileText, 
   Upload, 
@@ -16,7 +16,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://researchub-gcaw.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export default function App() {
   // Navigation tab state
@@ -39,6 +39,17 @@ export default function App() {
   // Drag and drop states
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef(null);
+
+  // Typeset math equations whenever messages change or finish loading
+  useEffect(() => {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      const timer = setTimeout(() => {
+        window.MathJax.typesetPromise()
+          .catch((err) => console.warn("MathJax typesetting failed:", err));
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [chatMessages, chatLoading, uploadResult]);
 
   // File selection handlers
   const handleFileChange = (e) => {
@@ -162,8 +173,14 @@ export default function App() {
 
       <main>
         <div className="dashboard-grid">
-          {/* Connection Status Panel */}
-          <HealthStatus />
+          {/* FAQ Panel */}
+          <ResearchFAQs 
+            onSelectQuestion={(faq) => {
+              setChatInput(faq);
+              setActiveTab('chat');
+            }}
+            disabled={!currentDocumentId}
+          />
 
           {/* Core Upload and Result Workspace */}
           <div className="glass-card workspace-card">

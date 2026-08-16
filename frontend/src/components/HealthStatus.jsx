@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Activity, Server, RefreshCw, Clock, Terminal } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://researchub-gcaw.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export default function HealthStatus() {
   const [status, setStatus] = useState('checking'); // checking | online | offline

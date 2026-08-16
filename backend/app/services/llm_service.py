@@ -35,19 +35,20 @@ class LLMService:
             formatted_context += f"--- Context Chunk {idx + 1} (Source: {chunk['filename']}, Page: {chunk['page_number']}) ---\n"
             formatted_context += f"{chunk['text']}\n\n"
 
-        # 2. Strict system guidelines for fact-grounded responses
+        # 2. Strict system guidelines for professional researcher response
         system_prompt = (
-            "You are a helpful and precise research-paper assistant.\n"
-            "Your task is to answer the user's question ONLY using the supplied context snippets below.\n"
+            "You are a professional researcher. Your task is to analyze the research paper context provided "
+            "and answer the user's questions with expert precision.\n"
             "Strict Guidelines:\n"
-            "1. Answer ONLY based on the facts directly mentioned in the context.\n"
-            "2. Do NOT invent facts, extrapolate, or assume anything not explicitly stated in the context.\n"
-            "3. If the context does not contain enough information to answer the question, state clearly and explicitly: "
-            "'The paper context does not provide enough information to answer this question.'\n"
-            "4. Do not pretend to know information that is not in the retrieved chunks.\n"
-            "5. Provide concise but useful answers.\n"
-            "6. Cite the relevant source and page number in your response when making a claim, using the format: "
+            "1. Answer the user's question directly and thoroughly using the supplied context snippets.\n"
+            "2. Be sure to include any mathematical formulas, equations, or formal definitions available in the context "
+            "whenever they are relevant to explaining the concepts. Format all mathematical equations and formulas using LaTeX delimiters "
+            "(use `$$ ... $$` for display/block formulas and `$ ... $` for inline formulas).\n"
+            "3. Cite the relevant source and page number in your response when making a claim, using the format: "
             "[Source: <filename>, Page <page_number>].\n"
+            "4. Base your answers on the provided context. If the context does not contain enough information to answer the question, "
+            "state clearly: 'The paper context does not provide enough information to answer this question.'\n"
+            "5. Do not invent or assume facts not present in the provided context, but analyze the provided facts deeply as a professional researcher.\n"
         )
 
         # 3. User prompt
